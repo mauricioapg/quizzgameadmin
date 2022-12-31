@@ -1,0 +1,27 @@
+.card{
+    width: 15.5rem;
+    border-radius: 10%;
+    border: 0.05rem solid;
+}
+
+.card h3{
+    justify-content: center;
+    padding: 0.5rem;
+    color: #FFF;
+}
+
+.headerCard{
+    background-color: #696969;
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10%;
+}
+
+.alternatives{
+    justify-content: center;
+    text-align: center;
+}
+
+.alternatives ul li{
+    list-style: none;
+    text-align: left;
+}

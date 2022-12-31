@@ -1,0 +1,15 @@
+[
+    {
+        "id": {
+            "timestamp": 1671204300,
+            "date": "2022-12-16T15:25:00.000+00:00"
+        },
+        "idUser": "e76de193-8b8f-48a7-835b-5b83479dd78c",
+        "name": "Mauricio Aparecido Gabriel Dias",
+        "email": "mauricioaparecidogabriel@gmail.com",
+        "username": "mauricio.dias",
+        "password": "$2a$12$jLihMQP7exuBGWVDHk3uQO7pOo/2CLJ4J45x30Z9O3sMn.HJtXb/W",
+        "idLevel": "41324db5-11b3-4821-b876-dcdc569b2a19",
+        "questionsAswered": []
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": {
+            "timestamp": 1671113414,
+            "date": "2022-12-15T14:10:14.000+00:00"
+        },
+        "idLevel": "41324db5-11b3-4821-b876-dcdc569b2a19",
+        "desc": "Iniciante"
+    },
+    {
+        "id": {
+            "timestamp": 1671113421,
+            "date": "2022-12-15T14:10:21.000+00:00"
+        },
+        "idLevel": "ad71026b-4ca2-4e50-b4c5-b862264b72c8",
+        "desc": "Intermediário"
+    },
+    {
+        "id": {
+            "timestamp": 1671113428,
+            "date": "2022-12-15T14:10:28.000+00:00"
+        },
+        "idLevel": "9dfe880b-5a77-447d-8d12-469c3e45ac9a",
+        "desc": "Avançado"
+    }
+]

@@ -1,0 +1,14 @@
+.header{
+    padding: 0.5rem;
+    background-color: #000;
+    max-width: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+.header label{
+    font-size: 1.5rem;
+    color: #FFF;
+    padding-top: 2.0rem;
+    padding-right: 1.0rem;
+}

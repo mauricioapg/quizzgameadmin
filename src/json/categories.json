@@ -1,0 +1,26 @@
+[
+    {
+        "idCategory": "c3cc24ac-2eaa-4168-b571-62456a07a634",
+        "desc": "Filmes e Séries"
+    },
+    {
+        "idCategory": "dc602b08-390a-478a-aafc-17cd0e0b64bf",
+        "desc": "Música"
+    },
+    {
+        "idCategory": "c3af07cd-8291-46ee-a508-39a180558376",
+        "desc": "Futebol"
+    },
+    {
+        "idCategory": "09566dfd-d10b-4032-8ac5-5a971e5333e1",
+        "desc": "Tecnologia"
+    },
+    {
+        "idCategory": "e6545a12-bcc1-4cd4-9549-4cba6dd4fbf7",
+        "desc": "História"
+    },
+    {
+        "idCategory": "5e6f0523-1dfd-4848-82b5-b794e0cae7ff",
+        "desc": "Matemática"
+    }
+]

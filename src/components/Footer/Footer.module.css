@@ -1,0 +1,11 @@
+.footer{
+    padding: 1.5rem 0;
+    max-width: 100%;
+    background-color: #000;
+    justify-content: center;
+}
+
+.footer h3{
+    color: #FFF;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+.textFieldAdd{
+    display: flex;
+    margin: 8px 0;
+}
+
+.textFieldAdd input{
+    background-color: #FFF;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    width: 90%;
+    border: none;
+    font-size: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    margin-right: 16px;
+    border-radius: 16px;
+}
+
+.textFieldAdd button{
+    background-color: #000;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    width: 10%;
+    border: none;
+    font-size: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.textFieldAdd button{
+    color: #FFF;
+    word-wrap: break-word;
+    border-radius: 24px;
+}
