@@ -1,0 +1,17 @@
+.modal{
+   text-align: center;
+    justify-content: center;
+    background-color: #F2F2F2;
+    width: 25%;
+    height: 20%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin: -4.5rem 0 0 -8.5rem;
+    border-radius: 1.5rem;
+}
+
+.modal img{
+    height: 4.0rem;
+    margin-top: 1.0rem;
+}

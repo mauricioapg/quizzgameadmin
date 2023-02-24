@@ -1,23 +1,79 @@
 import Button from 'components/Button'
 import Form from 'components/Form'
 import TextField from 'components/TextField'
-import { useState } from 'react'
+import CustomModal from 'components/CustomModal'
+import { useEffect, useState } from 'react'
+import { Route, Routes } from "react-router-dom"
 import styles from './Levels.module.css'
+import Header from 'components/Header'
+import Cookies from 'universal-cookie'
 
 const Levels = () => {
 
     const [descripton, setDescription] = useState('')
+    const [isOpenModal, setIsOpenModal] = useState(false)
+    const [messageModal, setMessageModal] = useState('')
+    const [success, setSuccess] = useState(false)
+
+    const cookies = new Cookies()
+
+    const createLevel = () => {
+        return fetch("http://localhost:8080/levels", {
+            method: "POST",
+            headers: {
+                'Authorization': cookies.get('token'),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                desc: descripton
+            })
+        }).then((response) => {
+            if (response.status == 201) {
+                setMessageModal('Nível criado com sucesso!')
+                setIsOpenModal(true)
+                setSuccess(true)
+            }
+            else {
+                setMessageModal('Não foi possível criar nível!')
+                setIsOpenModal(true)
+                setSuccess(false)
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data)
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createLevel()
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false)
+    }
 
     return (
-        <div>
-            <Form title='Preencha os campos para criar o nível'>
-                <TextField
-                    changeValue={value => setDescription(value)}
-                    title='Descrição'
-                    value={descripton} />
+        <>
+            <Routes>
+                <Route path='*' element={<Header />} />
+            </Routes>
+            <div>
+                <Form submit={handleSubmit} title='Preencha os campos para criar o nível'>
+                    <TextField
+                        changeValue={value => setDescription(value)}
+                        title='Descrição'
+                        value={descripton} />
                     <Button title='Criar Nível' />
-            </Form>
-        </div>
+                    <CustomModal
+                        open={isOpenModal}
+                        close={handleCloseModal}
+                        success={success}>
+                        <h3>{messageModal}</h3>
+                    </CustomModal>
+                </Form>
+            </div>
+        </>
     )
 }
 

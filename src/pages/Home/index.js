@@ -1,8 +1,19 @@
 import styles from './Home.module.css'
+import { Route, Routes } from "react-router-dom"
+import Header from 'components/Header'
+import Cookies from 'universal-cookie'
 
 const Home = () => {
-    return(
-        <div>Home...</div>
+
+    const cookies = new Cookies()
+
+    return (
+        <>
+            <Routes>
+                <Route path='*' element={<Header />} />
+            </Routes>
+            <div>Home...{cookies.get('token')}</div>
+        </>
     )
 }
 

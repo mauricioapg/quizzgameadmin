@@ -1,14 +1,15 @@
 import styles from './Questions.module.css'
 import { useEffect, useState } from 'react'
-// import questions from 'json/questions.json'
+import { Route, Routes } from "react-router-dom"
 import QuestionCard from 'components/QuestionCard'
 import TextField from 'components/TextField'
+import CustomModal from 'components/CustomModal'
 import DropDownList from 'components/DropDownList'
 import TextFieldAdd from 'components/TextFieldAdd'
 import Button from 'components/Button'
-import categories from 'json/categories.json'
-import levels from 'json/levels.json'
 import Form from 'components/Form'
+import Header from 'components/Header'
+import Cookies from 'universal-cookie'
 
 const Questions = () => {
 
@@ -17,26 +18,117 @@ const Questions = () => {
     const [level, setLevel] = useState('')
     const [alternative, setAlternative] = useState('')
     const [alternatives, setAlternatives] = useState([])
-    const [questions, setQuestions] = useState([])
+    const [answer, setAnswer] = useState([])
 
-    let headers = new Headers();
-    
-    headers.append('Authorization', 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXVyaWNpb2FwYXJlY2lkb2dhYnJpZWxAZ21haWwuY29tIiwiZXhwIjoxNjcyNjA5Mjg1fQ.fet2uVlkTDHTXccFRiL16NXqXadg62pi5KoHBydiBkRxkNbsqq9Q-SGZqF2b8P5-0ye2siI2f8_p1ucfY-DDiw');
+    const [questions, setQuestions] = useState([])
+    const [categories, setCategories] = useState([])
+    const [levels, setLevels] = useState([])
+
+    const [isOpenModal, setIsOpenModal] = useState(false)
+    const [messageModal, setMessageModal] = useState('')
+    const [success, setSuccess] = useState(false)
+
+    const cookies = new Cookies()
 
     useEffect(() => {
-        fetch('https://62edd141a785760e676f8b55.mockapi.io/api/v1/questions', {
+        getCategories()
+        getLevels()
+        getQuestions()
+    })
+
+    const getQuestions = () => {
+        fetch('http://localhost:8080/questions', {
             method: 'GET',
-            headers: headers
+            headers: {
+                'Authorization': cookies.get('token')
+            }
         })
             .then(response => response.json())
             .then(data => {
-                console.log('DADOS AQUI: ' + data)
                 setQuestions(data)
             })
-    }, [])
+    }
+
+    const getCategories = () => {
+        fetch('http://localhost:8080/categories', {
+            method: 'GET',
+            headers: {
+                'Authorization': cookies.get('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                setCategories(data)
+            })
+    }
+
+    const getLevels = () => {
+        fetch('http://localhost:8080/levels', {
+            method: 'GET',
+            headers: {
+                'Authorization': cookies.get('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                setLevels(data)
+            })
+    }
+
+    const createQuestion = () => {
+        return fetch("http://localhost:8080/questions", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': cookies.get('token')
+             },
+            body: JSON.stringify({
+                title: title,
+                idCategory: category,
+                idLevel: level,
+                alternatives: alternatives,
+                answer: answer,
+            })
+        }).then((response) => {
+            if(response.status == 201){
+                setMessageModal('Pergunta criada com sucesso!')
+                setIsOpenModal(true)
+                setSuccess(true)
+                getQuestions()
+            }
+            else{
+                setMessageModal('Não foi possível criar pergunta!')
+                setIsOpenModal(true)
+                setSuccess(false)
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data)
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createQuestion()
+    }
+
+    const handleKeyDown = (event) => {
+        event.preventDefault();
+        if (event.key === 'Enter') {
+            console.log(event.key)
+        }
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false)
+    }
 
     return (
-        <div>
+        <>
+            <Routes>
+                <Route path='*' element={<Header />}/>
+            </Routes>
+            <div>
             <Form title='Preencha os campos para criar a pergunta'>
                 <TextField
                     changeValue={value => setTitle(value)}
@@ -54,13 +146,25 @@ const Questions = () => {
                     items={levels.map(level => level.desc)} />
                 <label>Alternativa</label>
                 <TextFieldAdd
-                    addAlternative={() => { }}
                     changeValue={value => setAlternative(value)}
                     value={alternative}>
                     <img src='/images/add.png' />
                 </TextFieldAdd>
-                <Button title='Criar Pergunta' />
+                <div>
+                    {alternatives.map(alternative => <label>{alternative}</label>)}
+                </div>
+                <TextField
+                    changeValue={value => setAnswer(value)}
+                    title='Resposta'
+                    value={answer} />
+                <Button action={handleSubmit} title='Criar Pergunta' />
             </Form>
+            <CustomModal 
+            open={isOpenModal} 
+            close={handleCloseModal}
+            success={success}>
+                <h3>{messageModal}</h3>
+            </CustomModal>
             <div className={styles.questionList}>
                 {questions.map(
                     question => <div className={styles.cards}>
@@ -73,6 +177,7 @@ const Questions = () => {
                 )}
             </div>
         </div>
+        </>
     )
 }
 
