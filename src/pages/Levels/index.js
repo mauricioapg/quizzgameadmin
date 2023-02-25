@@ -3,7 +3,7 @@ import Form from 'components/Form'
 import TextField from 'components/TextField'
 import CustomModal from 'components/CustomModal'
 import { useEffect, useState } from 'react'
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import styles from './Levels.module.css'
 import Header from 'components/Header'
 import Cookies from 'universal-cookie'
@@ -16,6 +16,8 @@ const Levels = () => {
     const [success, setSuccess] = useState(false)
 
     const cookies = new Cookies()
+
+    const navigate = useNavigate()
 
     const createLevel = () => {
         return fetch("http://localhost:8080/levels", {
@@ -32,6 +34,9 @@ const Levels = () => {
                 setMessageModal('Nível criado com sucesso!')
                 setIsOpenModal(true)
                 setSuccess(true)
+            }
+            else if(response.status == 403){
+                navigate('/');
             }
             else {
                 setMessageModal('Não foi possível criar nível!')

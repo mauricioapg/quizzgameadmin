@@ -1,6 +1,6 @@
 import styles from './Questions.module.css'
 import { useEffect, useState } from 'react'
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import QuestionCard from 'components/QuestionCard'
 import TextField from 'components/TextField'
 import CustomModal from 'components/CustomModal'
@@ -27,8 +27,11 @@ const Questions = () => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [messageModal, setMessageModal] = useState('')
     const [success, setSuccess] = useState(false)
+    const [teste, setTeste] = useState(true)
 
     const cookies = new Cookies()
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getCategories()
@@ -95,6 +98,9 @@ const Questions = () => {
                 setIsOpenModal(true)
                 setSuccess(true)
                 getQuestions()
+            }
+            else if(response.status == 403){
+                navigate('/');
             }
             else{
                 setMessageModal('Não foi possível criar pergunta!')

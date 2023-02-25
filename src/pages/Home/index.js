@@ -12,7 +12,7 @@ const Home = () => {
             <Routes>
                 <Route path='*' element={<Header />} />
             </Routes>
-            <div>Home...{cookies.get('token')}</div>
+            <div>Home...</div>
         </>
     )
 }

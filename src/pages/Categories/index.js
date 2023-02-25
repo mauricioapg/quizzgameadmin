@@ -3,7 +3,8 @@ import Form from 'components/Form'
 import CustomModal from 'components/CustomModal'
 import TextField from 'components/TextField'
 import { useCategoryContext } from 'contexts/Categories'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Route, Routes } from "react-router-dom"
 import styles from './Categories.module.css'
 import Header from 'components/Header'
@@ -16,6 +17,8 @@ const Categories = () => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [messageModal, setMessageModal] = useState('')
     const [success, setSuccess] = useState(false)
+
+    const navigate = useNavigate()
 
     const cookies = new Cookies()
 
@@ -34,6 +37,9 @@ const Categories = () => {
                 setMessageModal('Categoria criada com sucesso!')
                 setIsOpenModal(true)
                 setSuccess(true)
+            }
+            else if(response.status == 403){
+                navigate('/');
             }
             else {
                 setMessageModal('Não foi possível criar categoria!')

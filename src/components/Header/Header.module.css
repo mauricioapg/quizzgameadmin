@@ -1,14 +1,48 @@
-.header{
-    padding: 0.5rem;
+.header {
     background-color: #000;
     max-width: 100%;
     justify-content: space-between;
     display: flex;
 }
 
-.header label{
-    font-size: 1.5rem;
-    color: #FFF;
-    padding-top: 2.0rem;
-    padding-right: 1.0rem;
+.header ul {
+    list-style-type: none;
+    background-color: #000;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.header label {
+    margin-top: 2.0rem;
+    margin-right: 1.0rem;
+    font-size: 20px;
+    color: #fff;
+}
+
+.user {
+    display: flex;
+}
+
+@media screen and (max-width: 500px){
+    .header ul {
+        flex-direction: column;
+        height: auto;
+    }
+    .header li:nth-child(1){
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        margin-top: 50px;
+    }
+    .header label {
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        text-align: center;
+        margin-right: 0px;
+        padding: 20px 0;
+    }
+    .user {
+        display: flex;
+    }
 }
