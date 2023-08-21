@@ -1,26 +1,21 @@
-.card{
-    width: 15.5rem;
+.tile{
+    display: flex;
+    width: 60%;
+    height: 80px;
     border-radius: 1.0rem;
-    border: 0.05rem solid;
+    background-color: #ADACAC;
+    justify-content: start;
+    padding-left: 40px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-.card h3{
-    justify-content: center;
-    padding: 0.5rem;
-    color: #FFF;
-}
-
-.headerCard{
-    background-color: #696969;
-    border-radius: 1.0rem;
-}
-
-.alternatives{
-    justify-content: center;
-    text-align: center;
-}
-
-.alternatives ul li{
+.tile ul{
     list-style: none;
-    text-align: left;
+    position: relative;
+    top: 34%;
+}
+
+.tile li{
+    font-size: 20px;
 }

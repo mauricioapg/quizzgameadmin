@@ -13,6 +13,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-top: 12px;
 }
 
 .header label {
@@ -22,8 +23,8 @@
     color: #fff;
 }
 
-.user {
-    display: flex;
+.user label{
+    margin-bottom: 12px;
 }
 
 @media screen and (max-width: 500px){

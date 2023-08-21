@@ -5,3 +5,7 @@
     padding-top: 1.0rem;
     padding-right: 1.5rem;
 }
+
+.nav:hover{
+    color: yellow;
+}

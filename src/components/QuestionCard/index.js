@@ -1,18 +1,15 @@
+import QuestionItem from 'components/QuestionItem'
 import styles from './QuestionCard.module.css'
 
-const QuestionCard = ({ title, alternatives }) => {
+const QuestionCard = ({ title, show, visibility, questions }) => {
     return (
-        <div className={styles.card}>
-            <div className={styles.headerCard}>
-                <h3>{title}</h3>
-            </div>
-            <div className={styles.alternatives}>
-                {alternatives.map((alternative) => {
-                    return <ul key={alternative}>
-                        <li>{alternative}</li>
-                    </ul>
-                })}
-            </div>
+        <div className={styles.tile} onClick={show}>
+            <ul>
+                <li>
+                    {title}
+                </li>
+                {/* <QuestionItem visibility={visibility} questions={questions} /> */}
+            </ul>
         </div>
     )
 }

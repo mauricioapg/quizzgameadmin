@@ -22,3 +22,43 @@
     padding: 24px;
     box-sizing: border-box;
 }
+
+.textFieldAdd{
+    display: flex;
+    margin: 8px 0;
+}
+
+.textFieldAdd input{
+    background-color: #FFF;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    width: 90%;
+    height: 20%;
+    border: none;
+    font-size: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    margin-right: 16px;
+    border-radius: 16px;
+}
+
+.textFieldAdd button{
+    background-color: #000;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    width: 10%;
+    height: 20%;
+    border: none;
+    font-size: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.textFieldAdd button{
+    color: #FFF;
+    word-wrap: break-word;
+    border-radius: 24px;
+}
+
+.alternatives ol{
+    font-size: 24px;
+    list-style-type: upper-alpha;
+}
