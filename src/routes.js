@@ -8,7 +8,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Questions from './pages/Questions';
-import Delete from 'pages/Delete';
 
 function AppRoutes() {
 
@@ -25,7 +24,6 @@ function AppRoutes() {
             <Route path='/questions' element={<Questions />} />
             <Route path='/categories' element={<Categories />} />
             <Route path='/levels' element={<Levels />} />
-            <Route path='/delete' element={<Delete />} />
           </Routes>
         </CategoryProvider>
       </UserProvider>

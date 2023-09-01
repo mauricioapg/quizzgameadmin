@@ -43,7 +43,7 @@ const Questions = () => {
 
     const getQuestions = () => {
         axios
-            .get(`http://localhost:8080/questions`, {
+            .get(`http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/questions`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -55,7 +55,7 @@ const Questions = () => {
 
     const getCategories = () => {
         axios
-            .get(`http://localhost:8080/categories`, {
+            .get(`http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/categories`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -67,7 +67,7 @@ const Questions = () => {
 
     const getLevels = () => {
         axios
-            .get(`http://localhost:8080/levels`, {
+            .get(`http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/levels`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -78,7 +78,7 @@ const Questions = () => {
     }
 
     const createQuestion = () => {
-        return fetch("http://localhost:8080/questions", {
+        return fetch("http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/questions", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

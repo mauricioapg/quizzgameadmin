@@ -20,7 +20,7 @@ const Levels = () => {
     const navigate = useNavigate()
 
     const createLevel = () => {
-        return fetch("http://localhost:8080/levels", {
+        return fetch("http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/levels", {
             method: "POST",
             headers: {
                 'Authorization': cookies.get('token'),
