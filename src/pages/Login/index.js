@@ -25,7 +25,7 @@ const Login = () => {
     }
 
     const login = () => {
-        fetch('http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/login', {
+        fetch('http://ec2-3-139-54-202.us-east-2.compute.amazonaws.com:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const Login = () => {
     }
 
     const getUser = (token, email) => {
-        fetch('http://ec2-3-142-84-224.us-east-2.compute.amazonaws.com:8080/users/email/' + email, {
+        fetch('http://ec2-3-139-54-202.us-east-2.compute.amazonaws.com:8080/users/email/' + email, {
             method: 'GET',
             headers: {
                 'Authorization': token

@@ -23,7 +23,7 @@ const Categories = () => {
     const cookies = new Cookies()
 
     const createCategory = () => {
-        return fetch("http://localhost:8080/categories", {
+        return fetch("http://ec2-3-139-54-202.us-east-2.compute.amazonaws.com/categories", {
             method: "POST",
             headers: {
                 'Authorization': cookies.get('token'),
