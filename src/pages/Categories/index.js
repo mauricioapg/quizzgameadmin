@@ -71,6 +71,7 @@ const Categories = () => {
                 <Form submit={handleSubmit} title='Preencha os campos para criar a categoria'>
                     <TextField
                         changeValue={value => setDescription(value)}
+                        type='text'
                         title='Descrição'
                         value={descripton} />
                     <Button

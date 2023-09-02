@@ -157,6 +157,7 @@ const Questions = () => {
                 <Form title='Preencha os campos para criar a pergunta'>
                     <TextField
                         changeValue={value => setTitle(value)}
+                        type='text'
                         title='Título'
                         value={title} />
                     <DropDownList
@@ -184,6 +185,7 @@ const Questions = () => {
                     </div>
                     <TextField
                         changeValue={value => setAnswer(value)}
+                        type='text'
                         title='Resposta'
                         value={answer} />
                     <Button action={handleSubmit} title='Criar Pergunta' />

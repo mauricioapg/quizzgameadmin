@@ -67,6 +67,7 @@ const Levels = () => {
                 <Form submit={handleSubmit} title='Preencha os campos para criar o nível'>
                     <TextField
                         changeValue={value => setDescription(value)}
+                        type='text'
                         title='Descrição'
                         value={descripton} />
                     <Button title='Criar Nível' />

@@ -9,7 +9,7 @@ const TextField = (props) => {
     return(
         <div className={styles.textField}>
             <label>{props.title}</label>
-            <input value={props.value} onChange={changeValue}></input>
+            <input type={props.type} value={props.value} onChange={changeValue}></input>
         </div>
     )
 }

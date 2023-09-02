@@ -82,10 +82,12 @@ const Login = () => {
             <Form submit={handleSubmit}>
                 <TextField
                     changeValue={value => setUsername(value)}
+                    type='text'
                     title='Nome de usuário'
                     value={username} />
                 <TextField
                     changeValue={value => setPassword(value)}
+                    type='password'
                     title='Senha'
                     value={password} />
                 <Button
