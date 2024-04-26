@@ -24,8 +24,33 @@ const Login = () => {
         password: password
     }
 
+    // const login = () => {
+    //     fetch('http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/login', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Accept: 'application/json',
+    //         },
+    //         body: JSON.stringify(credentialsLogin)
+    //     })
+    //         .then(response => {
+    //             if (response.status == 200) {
+    //                 response.json().then(json => {
+    //                     var formattedToken = JSON.stringify(json).substring(10, JSON.stringify(json).length - 2)
+    //                     cookies.set('token', `Bearer ${formattedToken}`)
+    //                     getUser(`Bearer ${formattedToken}`, username)
+    //                 })
+    //                 navigate('/home');
+    //             } else {
+    //                 setMessageModal('Não foi possível efetuar login!')
+    //                 setIsOpenModal(true)
+    //                 setSuccess(false)
+    //             }
+    //         })
+    // }
+
     const login = () => {
-        fetch('http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/login', {
+        fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +75,7 @@ const Login = () => {
     }
 
     const getUser = (token, email) => {
-        fetch('http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/users/email/' + email, {
+        fetch('http://localhost:8080/users/email/' + email, {
             method: 'GET',
             headers: {
                 'Authorization': token

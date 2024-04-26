@@ -3,12 +3,15 @@ import Form from 'components/Form'
 import CustomModal from 'components/CustomModal'
 import TextField from 'components/TextField'
 import { useCategoryContext } from 'contexts/Categories'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Route, Routes } from "react-router-dom"
 import styles from './Categories.module.css'
 import Header from 'components/Header'
 import Cookies from 'universal-cookie'
+import TabList from 'components/TabList'
+import QuestionCard from 'components/QuestionCard'
+import axios from 'axios';
 
 const Categories = () => {
 
@@ -17,13 +20,48 @@ const Categories = () => {
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [messageModal, setMessageModal] = useState('')
     const [success, setSuccess] = useState(false)
+    const [categoriesList, setCategories] = useState([])
+
+    const [visibility, setVisibility] = useState('list-item')
+    const [showQuestionList, setShowQuestionList] = useState(false)
+    const [titleTabList, setTitleTabList] = useState('')
 
     const navigate = useNavigate()
 
     const cookies = new Cookies()
 
+    useEffect(() => {
+        getCategories()
+        handleSetVisibility()
+        setSizeElements()
+    }, [])
+
+    const getCategories = () => {
+        axios
+            .get(`http://localhost:8080/categories`, {
+                headers: {
+                    'Authorization': cookies.get('token')
+                }
+            })
+            .then((response) => {
+                setCategories(response.data)
+            })
+    }
+
+    const removeCategory = (idCategory) => {
+        fetch(`http://localhost:8080/categories/id/${idCategory}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': cookies.get('token')
+            }
+        }).then((response) => {
+            getCategories()
+        })
+    }
+
     const createCategory = () => {
-        return fetch("http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/categories", {
+        return fetch("http://localhost:8080/categories", {
             method: "POST",
             headers: {
                 'Authorization': cookies.get('token'),
@@ -37,6 +75,7 @@ const Categories = () => {
                 setMessageModal('Categoria criada com sucesso!')
                 setIsOpenModal(true)
                 setSuccess(true)
+                setDescription('')
             }
             else if(response.status == 403){
                 navigate('/');
@@ -62,6 +101,34 @@ const Categories = () => {
         setIsOpenModal(false)
     }
 
+    const handleSetVisibility = (e) => {
+        if(showQuestionList == true){
+            setVisibility('list-item')
+            setTitleTabList('Ocultar categorias')
+        }
+        else{
+            setVisibility('none')
+            setTitleTabList('Exibir categorias')
+        }
+    }
+
+    const handleShowQuestionList = () => {
+        setShowQuestionList(!showQuestionList)
+        handleSetVisibility()
+    }
+
+    const remove = (e, idCategory) => {
+        e.preventDefault();
+        removeCategory(idCategory)
+    }
+
+    const setSizeElements = () => {
+        document.body.style.setProperty('--largura', '30%');
+        document.body.style.setProperty('--esquerda', '35%');
+        document.body.style.setProperty('--largura-card', '30%');
+        document.body.style.setProperty('--esquerda-card', '35%');
+    }
+
     return (
         <>
             <Routes>
@@ -78,17 +145,26 @@ const Categories = () => {
                         title='Criar Categoria'
                     />
                 </Form>
+
                 <CustomModal
                     open={isOpenModal}
                     close={handleCloseModal}
                     success={success}>
                     <h3>{messageModal}</h3>
                 </CustomModal>
-                {/* <div className={styles.categoryList}>
-                {categories.map((category) => {
-                    return <label>{category.descripton}</label>
-                })}
-            </div> */}
+
+                <TabList title={titleTabList} show={handleShowQuestionList} />
+                <br />
+
+                <div className={styles.categories}>
+                    {categoriesList.map(category =>
+                        <QuestionCard
+                            title={category.desc}
+                            visibility={visibility}
+                            image='/images/lixeira.png'
+                            remove={(e) => remove(e, category.idCategory)}
+                        />)}
+                </div>
             </div>
         </>
     )

@@ -1,0 +1,27 @@
+:root{
+    --largura: 55%;
+    --esquerda: 20%;
+}
+
+.tile{
+    display: flex;
+    width: var(--largura);
+    height: 50px;
+    border-radius: 1.0rem;
+    background-color: #efeeee;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-left: var(--esquerda);
+    cursor: pointer;
+}
+
+.tile ul{
+    list-style: none;
+    position: relative;
+    top: 20%;
+}
+
+.tile li{
+    font-size: 20px;
+    color: #000;
+}

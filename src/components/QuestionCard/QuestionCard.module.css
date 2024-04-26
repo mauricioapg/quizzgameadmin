@@ -1,13 +1,18 @@
+:root{
+    --largura-card: 60%;
+    --esquerda-card: 0%;
+}
+
 .tile{
     display: flex;
-    width: 60%;
+    width: var(--largura-card);
     height: 80px;
     border-radius: 1.0rem;
-    background-color: #ADACAC;
-    justify-content: start;
+    background-color: #d4d1d1;
     padding-left: 40px;
     margin-bottom: 10px;
-    cursor: pointer;
+    margin-left: var(--esquerda-card);
+    /* cursor: pointer; */
 }
 
 .tile ul{
@@ -18,4 +23,12 @@
 
 .tile li{
     font-size: 20px;
+    text-align: start;
+}
+
+.image{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }

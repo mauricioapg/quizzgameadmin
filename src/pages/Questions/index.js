@@ -11,6 +11,7 @@ import Header from 'components/Header'
 import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
+import TabList from 'components/TabList'
 
 const Questions = () => {
 
@@ -30,6 +31,9 @@ const Questions = () => {
     const [success, setSuccess] = useState(false)
 
     const [visibility, setVisibility] = useState('list-item')
+    const [showQuestionList, setShowQuestionList] = useState(false)
+    const [titleTabList, setTitleTabList] = useState('')
+    const [questionSelected, setQuestionSelected] = useState('')
 
     const cookies = new Cookies()
 
@@ -39,11 +43,13 @@ const Questions = () => {
         getCategories()
         getLevels()
         getQuestions()
+        handleSetVisibility()
+        setSizeElements()
     }, [])
 
     const getQuestions = () => {
         axios
-            .get(`http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/questions`, {
+            .get(`http://localhost:8080/questions`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -55,7 +61,7 @@ const Questions = () => {
 
     const getCategories = () => {
         axios
-            .get(`http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/categories`, {
+            .get(`http://localhost:8080/categories`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -67,7 +73,7 @@ const Questions = () => {
 
     const getLevels = () => {
         axios
-            .get(`http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/levels`, {
+            .get(`http://localhost:8080/levels`, {
                 headers: {
                     'Authorization': cookies.get('token')
                 }
@@ -77,8 +83,20 @@ const Questions = () => {
             })
     }
 
+    const removeQuestion = (idQuestion) => {
+        fetch(`http://localhost:8080/questions/id/${idQuestion}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': cookies.get('token')
+            }
+        }).then((response) => {
+            getQuestions()
+        })
+    }
+
     const createQuestion = () => {
-        return fetch("http://ec2-3-23-166-69.us-east-2.compute.amazonaws.com:8080/questions", {
+        return fetch("http://localhost:8080/questions", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -86,8 +104,8 @@ const Questions = () => {
             },
             body: JSON.stringify({
                 title: title,
-                category: category,
-                level: level,
+                category: category == '' ? categories[0].idCategory : category,
+                level: level == '' ? levels[0].desc : level,
                 alternatives: alternatives,
                 answer: answer,
             })
@@ -114,8 +132,19 @@ const Questions = () => {
     }
 
     const handleSetVisibility = (e) => {
-        e.preventDefault();
-        visibility == 'list-item' ? setVisibility('none') : setVisibility('list-item')
+        if(showQuestionList == true){
+            setVisibility('list-item')
+            setTitleTabList('Ocultar perguntas')
+        }
+        else{
+            setVisibility('none')
+            setTitleTabList('Exibir perguntas')
+        }
+    }
+
+    const handleShowQuestionList = () => {
+        setShowQuestionList(!showQuestionList)
+        handleSetVisibility()
     }
 
     const handleSubmit = (e) => {
@@ -147,6 +176,19 @@ const Questions = () => {
         setAnswer("")
         alternatives.length = 0
     }
+
+    const setSizeElements = () => {
+        document.body.style.setProperty('--largura', '55%');
+        document.body.style.setProperty('--esquerda', '22%');
+        document.body.style.setProperty('--largura-card', '55%');
+        document.body.style.setProperty('--esquerda-card', '0%');
+    }
+
+    const remove = (e, idQuestion) => {
+        e.preventDefault();
+        removeQuestion(idQuestion)
+    }
+    
 
     return (
         <>
@@ -190,18 +232,23 @@ const Questions = () => {
                         value={answer} />
                     <Button action={handleSubmit} title='Criar Pergunta' />
                 </Form>
+
                 <CustomModal
                     open={isOpenModal}
                     close={handleCloseModal}
                     success={success}>
                     <h3>{messageModal}</h3>
                 </CustomModal>
+
+                <TabList title={titleTabList} show={handleShowQuestionList} />
+
                 <div className={styles.questionList}>
                     {questions.map(question =>
                         <QuestionCard
                             title={question.title}
                             visibility={visibility}
-                            show={handleSetVisibility}
+                            image='/images/lixeira.png'
+                            remove={(e) => remove(e, question.idQuestion)}
                         />)}
                 </div>
                 {/* <div className={styles.questionList}>
